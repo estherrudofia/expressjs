@@ -1,27 +1,18 @@
 const express = require('express');
-
-// load express
+const appRoutes = require('./routes/app.routes')
 const app = express();
 
-// set view engine to ejs
+
 app.set('view engine', 'ejs');
 
-const port = process.env.port || 8000;
-
+// set view engine to ejs
 app.use(express.static('assets'));
 
-app.get('/', (req, res) => {
-    // Without ejs
-    // res.sendFile(__dirname + '/peace.html');
-    res.render('app');
-});
 
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-app.get('/contact', (req, res) => {
-    res.render('contact');
-});
+const port = process.env.port || 5000;
+
+app.use(appRoutes);
+
 
 app.listen(port);
-console.log('Listening on port 8000...');
+console.log(`Listening at port ${port}`);
